@@ -8,6 +8,8 @@ const verifyUser = async (ctx,next)=> {
     
         //验证客户端发过来的数据是否能保存到数据库
         const {name,password} = ctx.request.body
+        console.log(ctx.request.body);
+        
 
         //验证用户名和密码是否为空
         if(!name || !password){
