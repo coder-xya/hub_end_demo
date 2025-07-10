@@ -15,9 +15,6 @@ class LoginController {
          * 注意：secretOrPrivateKey has a minimum key size of 2048 bits for RS256
          * openssl rsa -in private.key -pubout -out public.key 根据私钥生成公钥
          */
-        console.log(id,name);
-        
-        console.log(PRIVATE_KEY);
         
         const token = jwt.sign({ id, name }, PRIVATE_KEY,{
             expiresIn: 24 * 60 * 60, //token过期时间m    

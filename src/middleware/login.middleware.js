@@ -1,10 +1,16 @@
 
 
-const { NAME_IS_NOT_EXISTS, NAME_OR_PASSWORD_IS_REQUIRE,PASSWORD_IS_INCORRENT } = require("../config/error-constants") 
+const { NAME_IS_NOT_EXISTS, NAME_OR_PASSWORD_IS_REQUIRE,PASSWORD_IS_INCORRENT ,UNAUTHORIZATION} = require("../config/error-constants") 
+const { PUBLIC_KEY } = require("../config/screctKeys")
 const userService = require("../service/user.service") 
 const md5Password = require("../utils/md5-password") 
 
-// 登录接口验证逻辑中间件
+const jwt = require('jsonwebtoken')
+
+
+/**
+ * 登录接口验证逻辑中间件
+ */
 
 const verifyLogin = async (ctx,next)=>{
     const {name,password} = ctx.request.body
@@ -35,4 +41,34 @@ const verifyLogin = async (ctx,next)=>{
     await next()
 }
 
-module.exports = {verifyLogin}
+
+/**
+ * token权限验证
+ * 
+ */
+
+const verifyAuth = async (ctx,next)=>{
+
+    const anthorization = ctx.headers.authorization
+    
+    const token = anthorization.replace('Bearer ','')
+
+    try {
+        const result = jwt.verify(token,PUBLIC_KEY,{
+        algorithms:'RS256'
+        })
+        // console.log('token验证通过',result);
+
+        ctx.user = result //
+
+        await next()
+    } catch (error) {
+        // console.log(error);
+        
+        ctx.app.emit('error',UNAUTHORIZATION,ctx)
+    }
+
+
+}
+
+module.exports = {verifyLogin,verifyAuth}
