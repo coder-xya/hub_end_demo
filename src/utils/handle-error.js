@@ -1,7 +1,14 @@
  
  
 const app =require('../app/index')
-const { NAME_OR_PASSWORD_IS_REQUIRE, NAME_IS_ALREADY_EXISTS,NAME_IS_NOT_EXISTS,PASSWORD_IS_INCORRENT,UNAUTHORIZATION } = require('../config/error-constants')
+const { 
+    NAME_OR_PASSWORD_IS_REQUIRE, 
+    NAME_IS_ALREADY_EXISTS,
+    NAME_IS_NOT_EXISTS,
+    PASSWORD_IS_INCORRENT,
+    UNAUTHORIZATION,
+    OPERATION_IS_NOT_ALLOWED 
+} = require('../config/error-constants')
 
  app.on('error',(error,ctx)=>{
     let code = 0
@@ -31,6 +38,11 @@ const { NAME_OR_PASSWORD_IS_REQUIRE, NAME_IS_ALREADY_EXISTS,NAME_IS_NOT_EXISTS,P
         case UNAUTHORIZATION:
             code = -1005
             message = 'token无效,请重新登录~'
+            break;
+
+        case OPERATION_IS_NOT_ALLOWED:
+            code = -2001
+            message = '没有操作权限~'
             break;
 
             

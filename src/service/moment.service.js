@@ -66,6 +66,18 @@ class MomentService {
             
         }
     }
+    //
+    async removeById(id){
+        try {
+            const statement = 'DELETE FROM moment WHERE id = ?'
+            const [result] = await connection.execute(statement,[id])
+            return result
+            
+        } catch (error) {   
+            console.log(error);
+            
+        }
+    }
 }
 
 

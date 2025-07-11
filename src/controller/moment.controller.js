@@ -62,6 +62,20 @@ class MomentController {
             msg:'动态修改成功～'
         }
     }
+    //删除动态
+    async remove(ctx,next){
+        const {id} = ctx.params
+
+        //
+        const result = await MomentService.removeById(id)
+        console.log(result);
+        
+
+        ctx.body = {
+            code : 0,
+            msg:'动态删除成功～'
+        }
+    }
 }
 
 module.exports = new MomentController
