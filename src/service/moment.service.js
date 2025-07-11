@@ -32,6 +32,26 @@ class MomentService {
         }
 
     }
+
+    async queryById(id){
+        try {
+                    const statement = `SELECT 
+            m.id id,m.content content,m.createAt createTime,m.updateAt updateTime,
+            JSON_OBJECT('id',u.id,'name',u.name,'createTime',u.createAt,'updateTime',u.updateAt) AS user
+            FROM moment m
+            LEFT JOIN user u ON u.id = m.user_id
+            WHERE m.id = ?;`
+
+
+        const [result] = await connection.execute(statement,[id])
+
+        return result
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+    }
 }
 
 
