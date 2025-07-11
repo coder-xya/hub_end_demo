@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Koa App",
+      "program": "${workspaceFolder}/src/main.js", // 入口文件路径
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "NODE_ENV": "development",
+        "PORT": "3000"
+      },
+      "console": "integratedTerminal",
+      "autoAttachChildProcesses": true,
+      "sourceMaps": true,
+    //   "outFiles": ["${workspaceFolder}/dist/**/*.js"], // TS项目需配置
+      "skipFiles": ["<node_internals>/**"]
+    }
+  ]
+}
