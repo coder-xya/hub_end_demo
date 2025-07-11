@@ -3,6 +3,7 @@ const connection = require("../app/database")
 
 
 class MomentService {
+    //
    async create(id,content){
 
     const statement = 'INSERT INTO `moment` (user_id,content) values (?,?); '
@@ -12,7 +13,7 @@ class MomentService {
     return result
 
     }
-
+//
     async queryList(limit,offset){
         try {
                     const statement = `SELECT 
@@ -32,7 +33,7 @@ class MomentService {
         }
 
     }
-
+//
     async queryById(id){
         try {
                     const statement = `SELECT 
@@ -51,6 +52,19 @@ class MomentService {
             
         }
 
+    }
+
+    //
+    async updateById(content,id){
+        try {
+            const statement = 'UPDATE moment set content = ? WHERE id = ?'
+            const [result] = await connection.execute(statement,[content,id])
+            return result
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
 }
 

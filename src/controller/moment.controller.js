@@ -1,6 +1,7 @@
 const MomentService = require("../service/moment.service")
 
 class MomentController {
+    //创建
     async create(ctx,next){
 
         // auth验证中间件存的（token中解析）
@@ -17,7 +18,7 @@ class MomentController {
             data:result
         }
     }
-
+//列表
     async list(ctx,next){
 
         const {limit,offset} = ctx.query
@@ -31,8 +32,7 @@ class MomentController {
         }
 
     }
-
-
+//详情
     async detail(ctx,next){
 
         const {id} = ctx.params
@@ -44,6 +44,23 @@ class MomentController {
             data:result[0]
         }
 
+    }
+
+    //修改动态
+    async update(ctx,next){
+
+        const {content} = ctx.request.body
+        const {id} = ctx.params
+
+        //
+        const result = await MomentService.updateById(content,id)
+        console.log(result);
+        
+
+        ctx.body = {
+            code : 0,
+            msg:'动态修改成功～'
+        }
     }
 }
 
