@@ -10,7 +10,7 @@ function registerRouters (app){
 
     const files = fs.readdirSync(__dirname)
 
-    console.log(files);
+    // console.log(files);
 
     for(const file of files){
         

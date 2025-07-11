@@ -20,7 +20,7 @@ class LoginController {
             expiresIn: 24 * 60 * 60, //token过期时间m    
             algorithm: 'RS256' //使用rs256算法加密
         })
-        console.log(token,"token");
+        // console.log(token,"token");
         
 
         ctx.body = {code:0,data:{id,name,token}}

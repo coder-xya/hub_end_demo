@@ -50,6 +50,9 @@ const verifyLogin = async (ctx,next)=>{
 const verifyAuth = async (ctx,next)=>{
 
     const anthorization = ctx.headers.authorization
+    if(!anthorization){
+        return ctx.app.emit('error',UNAUTHORIZATION,ctx)
+    }
     
     const token = anthorization.replace('Bearer ','')
 
