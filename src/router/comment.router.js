@@ -7,4 +7,6 @@ const commentRouter = new KoaRouter({prefix:'/comment'})
 
 commentRouter.post('/create',verifyAuth,commentController.create)
 
+commentRouter.post('/reply',verifyAuth,commentController.reply)
+
 module.exports = commentRouter
