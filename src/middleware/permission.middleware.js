@@ -7,14 +7,14 @@
 const PermissionService = require("../service/permission.service")
 const {OPERATION_IS_NOT_ALLOWED} = require("../config/error-constants")
 
- const verifyMomentPermission = function (resource){
+ const verifyPermission = function (resource){
     return async(ctx,next) => {
 
         try {
             const {id : momentId} = ctx.params
             const {id : userId} = ctx.user
 
-            const isPermission = await PermissionService.momentPermission(resource,momentId,userId)
+            const isPermission = await PermissionService.permission(resource,momentId,userId)
 
             if(!isPermission){
             return ctx.app.emit('error',OPERATION_IS_NOT_ALLOWED,ctx)
@@ -32,5 +32,5 @@ const {OPERATION_IS_NOT_ALLOWED} = require("../config/error-constants")
  }
 
 module.exports = {
-    verifyMomentPermission
+    verifyPermission
 }

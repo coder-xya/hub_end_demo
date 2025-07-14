@@ -88,6 +88,18 @@ class MomentService {
             
         }
     }
+    //查询是否有某个标签
+    async hasTheLabel(momentId,labelId){
+        const statement = 'SELECT * FROM moment_label WHERE moment_id = ? AND label_id = ?;'
+        const [result] = await connection.execute(statement,[momentId,labelId])
+        return !!result.length
+    }
+    //设置标签
+    async addLabel (momentId,labelId){
+        const statement = 'INSERT INTO moment_label (moment_id,label_id) values (?,?);'
+        const [result] = await connection.execute(statement,[momentId,labelId])
+        return result
+    }
 }
 
 

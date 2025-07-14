@@ -45,7 +45,6 @@ class MomentController {
         }
 
     }
-
     //修改动态
     async update(ctx,next){
 
@@ -74,6 +73,26 @@ class MomentController {
         ctx.body = {
             code : 0,
             msg:'动态删除成功～'
+        }
+    }
+    //设置labels
+    async addLabels(ctx,next){
+
+        const labels = ctx.labels
+
+        const {id:momentId} = ctx.params
+
+        for(const label of labels){
+            const isExists = await MomentService.hasTheLabel(momentId,label.id)
+
+            if(!isExists){
+                const result = await MomentService.addLabel(momentId,label.id)
+            }
+        }
+
+        ctx.body = {
+            code: 0,
+            massageL:'添加标签成功～'
         }
     }
 }
