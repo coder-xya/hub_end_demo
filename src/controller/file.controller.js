@@ -1,4 +1,4 @@
-con(( f)leService = require("../service/file.service")
+const fileService = require("../service/file.service")
 
 
 class FileController {
@@ -9,7 +9,7 @@ class FileController {
         const {filename,mimetype,size} = ctx.request.file
         const {id:userId} = ctx.user
 
-        const result = await fileService.avatarCreate(filename,mimetype,size,userId)
+        const result = sawait fileService.avatarCreate(filename,mimetype,size,userId)
 
         ctx.body = {
             code:0,
