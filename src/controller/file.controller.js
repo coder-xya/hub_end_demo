@@ -1,4 +1,9 @@
 const fileService = require("../service/file.service")
+const userService = require("../service/user.service")
+const {
+    SERVER_HOST,
+    SERVER_PORT
+} = require('../config/server')
 
 
 class FileController {
@@ -11,9 +16,15 @@ class FileController {
 
         const result = await fileService.avatarCreate(filename,mimetype,size,userId)
 
+
+        const avatarUrl = `${SERVER_HOST}:${SERVER_PORT}/users/avatar/${userId}`
+        const result2 = await userService.updateUserAvatar(avatarUrl,userId)
+
+
         ctx.body = {
             code:0,
-            message:'头像上传成功～'
+            message:'头像上传成功～',
+            data:avatarUrl
         }
     
     }  
