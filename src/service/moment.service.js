@@ -1,4 +1,4 @@
-co/st connection = require("../app/database")
+const connection = require("../app/database")
 
 
 

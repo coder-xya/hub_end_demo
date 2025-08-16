@@ -1,14 +1,15 @@
 
 const mysql = require('mysql2')
 
+const {MYSQL_HOST,MYSQL_PORT,MYSQL_DATABASE,MYSQL_USER,MYSQL_PASSWORD} = require('../config/server.js')
 
 // 创建连接池
 const connectionPool = mysql.createPool({
-    host:'localhost',
-    port:3306,
-    database:'coderhub',
-    user:'root',
-    password:'111111',
+    host:MYSQL_HOST||'localhost',
+    port:MYSQL_PORT||3306,
+    database:MYSQL_DATABASE||coderhub,
+    user:MYSQL_USER||'root',
+    password:MYSQL_PASSWORD||'123456',
     connectionLimit:5
 })
 
